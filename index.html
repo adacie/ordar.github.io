@@ -20,13 +20,23 @@
 #home .owner-pill{grid-column:4/5;justify-self:start;margin-left:0;text-align:left}
 @media(max-width:420px){.pay-summary{grid-template-columns:1fr 1fr}.save-pay,.pay-info-btn{min-height:54px;font-size:15px}#home .task{grid-template-columns:58px minmax(96px,1fr) 78px 104px}#home .task .amount{grid-column:3/4;min-width:78px}#home .owner-pill{grid-column:4/5;justify-self:start;margin-left:0;text-align:left}}
 
-/* owner-right-align-v2 */
-#home .task{grid-template-columns:58px 132px 86px 1fr 118px}
-#home .owner-pill{grid-column:5/6;justify-self:end;margin-left:0;text-align:right}
+/* owner-right-align-v3-constrained */
+#home .task{
+  grid-template-columns:58px minmax(0,132px) minmax(68px,86px) minmax(0,1fr) minmax(92px,118px);
+  width:100%;max-width:100%;overflow:hidden;
+}
+#home .task .amount{font-size:13px;min-width:0;white-space:nowrap}
+#home .owner-pill{
+  grid-column:5/6;justify-self:end;max-width:100%;min-width:0;margin-left:0;
+  padding:5px 8px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
 @media(max-width:420px){
-  #home .task{grid-template-columns:58px minmax(96px,1fr) 78px 1fr}
-  #home .task .amount{grid-column:3/4;min-width:78px}
-  #home .owner-pill{grid-column:4/5;justify-self:end;margin-left:0;text-align:right}
+  #home .task{grid-template-columns:58px minmax(0,1fr) minmax(62px,76px) minmax(88px,104px);gap:8px}
+  #home .task .amount{grid-column:3/4;min-width:0;font-size:12px}
+  #home .owner-pill{
+    grid-column:4/5;justify-self:end;max-width:100%;min-width:0;margin-left:0;
+    padding:5px 7px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
 }
 </style></head><body><div class="app"><header class="top"><div class="topline"><div><div class="brand">CAMP ORDER</div><div class="title">小叮噹團露訂餐</div><div class="date">2026 / 09 / 12</div></div><button class="install" id="installBtn">加入主畫面</button></div><div class="summary"><div class="hero-stat"><small>訂單總額</small><b id="topTotal"></b></div><div class="hero-stat"><small>已繳費</small><b id="topPaid"></b></div></div></header>
 <main><section id="home" class="screen active"><div class="section-title"><h2>總覽</h2><span>店家金額與取餐金額整合顯示</span></div><div class="cards" id="storeCards"></div></section>
