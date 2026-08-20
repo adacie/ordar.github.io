@@ -20,19 +20,36 @@
 #home .owner-pill{grid-column:4/5;justify-self:start;margin-left:0;text-align:left}
 @media(max-width:420px){.pay-summary{grid-template-columns:1fr 1fr}.save-pay,.pay-info-btn{min-height:54px;font-size:15px}#home .task{grid-template-columns:58px minmax(96px,1fr) 78px 104px}#home .task .amount{grid-column:3/4;min-width:78px}#home .owner-pill{grid-column:4/5;justify-self:start;margin-left:0;text-align:left}}
 
-/* owner-right-align-v3-constrained */
+/* final-layout-owner-v1 */
+.screen{width:100%;max-width:680px;margin:0 auto;box-sizing:border-box}
+#home.screen.active,#pay.screen.active,#orders.screen.active,#mine.screen.active{position:static;left:auto;top:auto;bottom:auto;width:100%;max-width:680px;height:auto;min-height:0;margin:0 auto;transform:none;overflow:visible;display:block}
+.pay-info-btn{border:0;background:#0b4f6c;color:#fff;border-radius:16px;padding:13px 10px;font-weight:900;font-size:16px;box-shadow:0 6px 16px #183b5620}
+.payment-options{padding:18px;display:grid;gap:12px}.payment-option{background:#f5f8f9;border:1px solid var(--line);border-radius:16px;padding:15px 16px}.payment-option b,.payment-option span{display:block}.payment-option span{line-height:1.65}
+#orders.screen.active .tools{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+#orderPeople,.person-order,#orderPeople .person-order{height:auto;min-height:0;overflow:visible}
+#orderPeople .person-head{height:auto;min-height:0;overflow:visible;align-items:flex-start}
+#home .task{grid-template-columns:58px 132px 86px 108px 1fr}
+#home .owner-pill{grid-column:4/5;justify-self:start;margin-left:0;text-align:left}
+@media(max-width:420px){.pay-summary{grid-template-columns:1fr 1fr}.save-pay,.pay-info-btn{min-height:54px;font-size:15px}#home .task{grid-template-columns:58px minmax(96px,1fr) 78px 104px}#home .task .amount{grid-column:3/4;min-width:78px}#home .owner-pill{grid-column:4/5;justify-self:start;margin-left:0;text-align:left}}
+
+/* owner-right-align-v4-smaller-amount */
 #home .task{
-  grid-template-columns:58px minmax(0,132px) minmax(68px,86px) minmax(0,1fr) minmax(92px,118px);
+  grid-template-columns:58px minmax(0,132px) minmax(58px,72px) minmax(0,1fr) minmax(92px,118px);
   width:100%;max-width:100%;overflow:hidden;
 }
-#home .task .amount{font-size:13px;min-width:0;white-space:nowrap}
+#home .task .amount{
+  font-size:11px;
+  font-weight:700;
+  min-width:0;
+  white-space:nowrap;
+}
 #home .owner-pill{
   grid-column:5/6;justify-self:end;max-width:100%;min-width:0;margin-left:0;
   padding:5px 8px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 @media(max-width:420px){
-  #home .task{grid-template-columns:58px minmax(0,1fr) minmax(62px,76px) minmax(88px,104px);gap:8px}
-  #home .task .amount{grid-column:3/4;min-width:0;font-size:12px}
+  #home .task{grid-template-columns:58px minmax(0,1fr) minmax(54px,66px) minmax(88px,104px);gap:8px}
+  #home .task .amount{grid-column:3/4;min-width:0;font-size:10px;font-weight:700}
   #home .owner-pill{
     grid-column:4/5;justify-self:end;max-width:100%;min-width:0;margin-left:0;
     padding:5px 7px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
