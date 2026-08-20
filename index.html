@@ -55,6 +55,75 @@
     padding:5px 7px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
 }
+
+/* overview-nowrap-amount-right-v5 */
+#home .task{
+  grid-template-columns:58px minmax(0,1fr) minmax(58px,72px) minmax(92px,118px);
+  gap:8px;
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+}
+#home .overview-main{
+  min-width:0;
+  overflow:hidden;
+}
+#home .store-title{
+  display:block;
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#home .task .amount{
+  grid-column:3/4;
+  justify-self:end;
+  text-align:right;
+  min-width:0;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
+#home .owner-pill{
+  grid-column:4/5;
+  justify-self:end;
+  max-width:100%;
+  min-width:0;
+  margin-left:0;
+  text-align:right;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+@media(max-width:420px){
+  #home .task{
+    grid-template-columns:58px minmax(0,1fr) minmax(54px,66px) minmax(88px,104px);
+    gap:8px;
+  }
+  #home .store-title{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  #home .task .amount{
+    grid-column:3/4;
+    justify-self:end;
+    text-align:right;
+    min-width:0;
+    font-size:10px;
+  }
+  #home .owner-pill{
+    grid-column:4/5;
+    justify-self:end;
+    max-width:100%;
+    min-width:0;
+    text-align:right;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+}
+
 </style></head><body><div class="app"><header class="top"><div class="topline"><div><div class="brand">CAMP ORDER</div><div class="title">小叮噹團露訂餐</div><div class="date">2026 / 09 / 12</div></div><button class="install" id="installBtn">加入主畫面</button></div><div class="summary"><div class="hero-stat"><small>訂單總額</small><b id="topTotal"></b></div><div class="hero-stat"><small>已繳費</small><b id="topPaid"></b></div></div></header>
 <main><section id="home" class="screen active"><div class="section-title"><h2>總覽</h2><span>店家金額與取餐金額整合顯示</span></div><div class="cards" id="storeCards"></div></section>
 <section id="pay" class="screen"><div class="pay-sticky"><div class="pay-summary"><button class="save-pay" id="savePayBtn">更新</button><button class="pay-info-btn" id="payInfoBtn" type="button">我要繳費</button></div><div id="payHint">選擇狀態後，需輸入密碼才會儲存<span id="paySavedAt"></span></div></div><div class="cards" id="payPeople"></div></section>
@@ -64,8 +133,8 @@
 <div class="modal" id="payPwdModal"><div class="modal-card"><div class="modal-head"><div><h3>輸入更新密碼</h3><div class="sub">確認後才會儲存繳費狀態</div></div><button class="modal-close" id="pwdClose" aria-label="關閉">×</button></div><div class="pwd-box"><input class="pwd-input" id="payPwdInput" type="password" inputmode="numeric" autocomplete="off" placeholder="請輸入密碼"><div class="pwd-actions"><button class="pwd-cancel" id="pwdCancel">取消</button><button class="pwd-confirm" id="pwdConfirm">確認更新</button></div></div></div></div>
 <div class="modal" id="payInfoModal"><div class="modal-card"><div class="modal-head"><div><h3>繳費方式</h3><div class="sub">請選擇方便的繳費方式</div></div><button class="modal-close" id="payInfoClose" aria-label="關閉">×</button></div><div class="payment-options"><div class="payment-option"><b>1. LINE Pay Money</b></div><div class="payment-option"><b>2. 轉帳</b><span>823 將來銀行</span><span>8869-0928-1314-10</span></div><div class="payment-option"><b>3. 現金</b></div></div></div></div><nav class="bottom"><button class="tab active" data-page="home"><span class="ico">⌂</span>總覽</button><button class="tab" data-page="pay"><span class="ico">＄</span>繳費</button><button class="tab" data-page="orders"><span class="ico">☷</span>訂單</button><button class="tab" data-page="mine"><span class="ico">●</span>我的</button></nav><div class="toast" id="toast">已更新繳費狀況</div>
 <script>
-const people=[{"name": "小菱", "total": 968, "stores": [323, 0, 150, 200, 115, 180], "status": "轉帳"}, {"name": "志明", "total": 1120, "stores": [300, 0, 140, 320, 0, 360], "status": "LINE Pay"}, {"name": "小古", "total": 815, "stores": [350, 0, 105, 0, 360, 0], "status": "未繳費"}, {"name": "侑靜", "total": 720, "stores": [280, 0, 185, 0, 255, 0], "status": "LINE Pay"}, {"name": "宏哥", "total": 465, "stores": [120, 0, 0, 130, 0, 215], "status": "未繳費"}, {"name": "米倫", "total": 1235, "stores": [395, 0, 320, 300, 0, 220], "status": "未繳費"}, {"name": "球球1", "total": 1538, "stores": [478, 0, 330, 460, 0, 270], "status": "未繳費"}, {"name": "球球2", "total": 845, "stores": [345, 0, 0, 260, 0, 240], "status": "未繳費"}, {"name": "依潔", "total": 1040, "stores": [0, 350, 210, 280, 0, 200], "status": "未繳費"}, {"name": "曉隸", "total": 915, "stores": [0, 350, 0, 280, 0, 285], "status": "未繳費"}, {"name": "詩涵", "total": 495, "stores": [0, 0, 105, 240, 0, 150], "status": "未繳費"}],details=[{"store": "八方雲集(午餐)", "person": "小菱", "items": "招牌鍋貼*10 ($70)、招牌水餃*10 ($70)、紅燒牛肉麵+滷蛋 ($183)", "amount": 323}, {"store": "八方雲集(午餐)", "person": "志明", "items": "招牌水餃*10 ($70)、韓式辣味水餃*10 ($70)、玉米水餃*10 ($70)、麻醬乾麵(大)+滷蛋 ($90)", "amount": 300}, {"store": "八方雲集(午餐)", "person": "小古", "items": "玉米鍋貼*10、韓式辣味鍋貼*10、招牌鍋貼*20、韓式水餃*10", "amount": 350}, {"store": "八方雲集(午餐)", "person": "侑靜", "items": "玉米鍋貼*10 ($70)、招牌鍋貼*10 ($70)、招牌鍋貼*10 ($70)、酸辣湯*2 ($70)", "amount": 280}, {"store": "八方雲集(午餐)", "person": "宏哥", "items": "紅燒牛湯餃 ($120)", "amount": 120}, {"store": "八方雲集(午餐)", "person": "米倫", "items": "玉米鍋貼*10 ($70)、招牌乾麵-小 ($55)、紅油珍珠抄手 ($60)、玉米濃湯*2 ($70)、招牌水餃*20 ($140)", "amount": 395}, {"store": "八方雲集(午餐)", "person": "球球1", "items": "辣味鍋貼8+10 ($126)、玉米鍋貼5+12 ($119)、玉米水餃4 ($28)、酸辣湯 ($35)、玉米濃湯 ($35)、滷蛋*2 ($30)、燙青菜*3 ($105)", "amount": 478}, {"store": "八方雲集(午餐)", "person": "球球2", "items": "玉米湯餃 ($90)、招牌鍋貼*15 ($105)、辣味水餃*15 ($105)、古早味乾麵-小 ($45)", "amount": 345}, {"store": "上野便當(午餐)", "person": "依潔", "items": "烤肉飯 ($115)、烤排骨飯 ($115)、烤雞排飯 ($120)", "amount": 350}, {"store": "上野便當(午餐)", "person": "曉隸", "items": "烤肉飯 ($115)、烤排骨飯 ($115)、烤雞排飯 ($120)", "amount": 350}, {"store": "清心福全", "person": "小菱", "items": "紅心芭樂多多+椰果(半糖少冰) ($85)、多多綠加QQ(半糖正常冰) ($65)", "amount": 150}, {"store": "清心福全", "person": "志明", "items": "珍珠鮮奶茶(少糖少冰)L*2 ($140)", "amount": 140}, {"store": "清心福全", "person": "侑靜", "items": "情人茶(半糖微冰)*2 ($120)、甘蔗四季(少糖微冰) ($65)", "amount": 185}, {"store": "清心福全", "person": "小古", "items": "烏龍清茶(無糖微冰) ($35)、珍珠鮮奶茶(微糖微冰) ($70)", "amount": 105}, {"store": "清心福全", "person": "依潔", "items": "烏龍綠(無糖少冰)L ($35)、優多綠(無糖少冰)L ($55)、布丁奶茶(無糖少冰)L ($60)、仙草凍奶茶(無糖少冰)L ($60)", "amount": 210}, {"store": "清心福全", "person": "米倫", "items": "優多綠+椰果L(微糖少冰) ($65)、冰淇淋紅茶+布丁L(微糖少冰) ($75)、優多綠茶L(微糖少冰) ($55)、鮮奶茶M(微糖少冰) ($55)、雙Q百香果綠茶L(少冰微糖) ($70)", "amount": 320}, {"store": "清心福全", "person": "詩涵", "items": "普洱(無糖去冰)L*2 ($70)、紅茶(少糖去冰)L ($35)", "amount": 105}, {"store": "清心福全", "person": "球球1", "items": "荔枝蘋果醋(微糖微冰)*2 ($150)、烏龍奶(微糖微冰)*2 ($120)、情人茶(半糖微冰)*1 ($60)", "amount": 330}, {"store": "炒飯(晚餐)", "person": "小菱", "items": "火腿炒飯 ($80)、燙青菜 ($40)、豬肉炒麵 ($80)", "amount": 200}, {"store": "炒飯(晚餐)", "person": "曉隸", "items": "燙青菜 ($40)、牛肉炒飯*2 ($160)、培根炒飯*1 ($80)", "amount": 280}, {"store": "炒飯(晚餐)", "person": "志明", "items": "牛肉炒飯 ($80)、羊肉炒飯 ($80)、牛肉炒麵 ($80)、羊肉炒麵 ($80)", "amount": 320}, {"store": "炒飯(晚餐)", "person": "依潔", "items": "蝦仁炒飯 ($80)、櫻花蝦炒飯 ($80)、牛肉炒麵 ($80)、燙青菜 ($40)", "amount": 280}, {"store": "炒飯(晚餐)", "person": "宏哥", "items": "羊肉炒麵 ($80)、骨仔肉湯 ($50)", "amount": 130}, {"store": "炒飯(晚餐)", "person": "米倫", "items": "蝦仁炒飯 ($80)、蛤蜊湯*2 ($100)、燙青菜 ($40)、豬肉炒麵 ($80)", "amount": 300}, {"store": "炒飯(晚餐)", "person": "詩涵", "items": "牛肉炒飯*2 ($160)、櫻花蝦炒飯*1 ($80)", "amount": 240}, {"store": "炒飯(晚餐)", "person": "球球1", "items": "櫻花蝦炒飯*3 ($240)、乾米粉*2 ($100)、蘿蔔湯*2 ($80)、燙青菜 ($40)", "amount": 460}, {"store": "炒飯(晚餐)", "person": "球球2", "items": "牛肉燴飯 ($80)、鴨肉麵 ($50)、骨仔肉湯 ($50)、牛肉炒飯 ($80)", "amount": 260}, {"store": "上野便當(晚餐)", "person": "小菱", "items": "烤肉飯*1 ($115)", "amount": 115}, {"store": "上野便當(晚餐)", "person": "小古", "items": "香酥雞腿便當*2、豪大雞排便當", "amount": 360}, {"store": "上野便當(晚餐)", "person": "侑靜", "items": "烤雞腿飯*2 ($240)、白飯*1 ($15)", "amount": 255}, {"store": "鹹酥雞(宵夜)", "person": "小菱", "items": "鹹酥雞 ($60)、糯米腸 ($25)、鑫鑫腸 ($25)、雞屁股(大辣) ($30)、花椰菜 ($40)", "amount": 180}, {"store": "鹹酥雞(宵夜)", "person": "曉隸", "items": "鹹酥雞排*3 ($240)、魷魚頭*1 ($60)", "amount": 285}, {"store": "鹹酥雞(宵夜)", "person": "志明", "items": "醬燒雞排 ($80)、梅子雞排 ($80)、酥脆甜不辣*2 ($60)、雞屁股 ($30)、鑫鑫腸*2 ($50)、花枝丸*2 ($60)", "amount": 360}, {"store": "鹹酥雞(宵夜)", "person": "依潔", "items": "醬燒雞排 ($80)、魷魚頭*1 ($60)、酥脆甜不辣*1 ($30)、地瓜薯條*1 ($30)", "amount": 200}, {"store": "鹹酥雞(宵夜)", "person": "宏哥", "items": "三角骨 ($60)、香酥雞皮 ($40)、花枝丸 ($30)、雞屁股*2 ($60)、米腸 ($25)", "amount": 215}, {"store": "鹹酥雞(宵夜)", "person": "米倫", "items": "地瓜薯條 ($30)、甜不辣*2 ($60)、甜芋頭 ($30)、鹹酥雞 ($60)、四季豆 ($40)", "amount": 220}, {"store": "鹹酥雞(宵夜)", "person": "詩涵", "items": "鹽酥雞排*2 ($150)", "amount": 150}, {"store": "鹹酥雞(宵夜)", "person": "球球1", "items": "魷魚頭 ($60)、鹹酥雞 ($60)、酥脆甜不辣 ($30)、米血糕 ($30)、雞塊 ($20)、四季豆 ($40)、仙草甘茶 ($30)", "amount": 270}, {"store": "鹹酥雞(宵夜)", "person": "球球2", "items": "鹹酥雞 ($60)、玉米筍 ($40)、馬鈴薯條(梅粉) ($30)、香酥雞皮*2 ($80)、雞心 ($30)", "amount": 240}],assignments=[{"store": "八方雲集", "time": "12:30", "owner": "米倫", "total": 2591}, {"store": "上野便當", "time": "12:30", "owner": "依潔", "total": 700}, {"store": "清心福全", "time": "13:30", "owner": "球球", "total": 1545}, {"store": "炒飯", "time": "18:00", "owner": "依潔", "total": 2470}, {"store": "上野便當", "time": "18:00", "owner": "依潔", "total": 730}, {"store": "鹹酥雞", "time": "21:00", "owner": "詩涵", "total": 2120}],storeTotals={"八方雲集(午餐)": 2591, "上野便當(午餐)": 700, "清心福全": 1545, "炒飯(晚餐)": 2470, "上野便當(晚餐)": 730, "鹹酥雞(宵夜)": 2120};const total=people.reduce((a,p)=>a+p.total,0),money=n=>'$'+Number(n).toLocaleString('zh-TW');
-const key='campOrderPay_20260912';let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}const nameMap={'菱':'小菱','明':'志明','古':'小古','靜':'侑靜','宏':'宏哥','球1':'球球1','球2':'球球2','隸':'曉隸','涵':'詩涵','潔':'依潔'};Object.keys(nameMap).forEach(o=>{if(state[o]&&!state[nameMap[o]])state[nameMap[o]]=state[o];delete state[o]});people.forEach(p=>{if(!state[p.name])state[p.name]=p.status});let draftState=Object.assign({},state);
+const people=[{"name": "小菱", "total": 968, "stores": [323, 0, 150, 200, 115, 180], "status": "轉帳"}, {"name": "志明", "total": 1120, "stores": [300, 0, 140, 320, 0, 360], "status": "LINE Pay"}, {"name": "小古", "total": 815, "stores": [350, 0, 105, 0, 360, 0], "status": "未繳費"}, {"name": "侑靜", "total": 720, "stores": [280, 0, 185, 0, 255, 0], "status": "LINE Pay"}, {"name": "宏哥", "total": 465, "stores": [120, 0, 0, 130, 0, 215], "status": "未繳費"}, {"name": "米倫", "total": 1235, "stores": [395, 0, 320, 300, 0, 220], "status": "未繳費"}, {"name": "球球1", "total": 1538, "stores": [478, 0, 330, 460, 0, 270], "status": "未繳費"}, {"name": "球球2", "total": 845, "stores": [345, 0, 0, 260, 0, 240], "status": "未繳費"}, {"name": "依潔", "total": 1040, "stores": [0, 350, 210, 280, 0, 200], "status": "未繳費"}, {"name": "曉隸", "total": 1110, "stores": [0, 350, 195, 280, 0, 285], "status": "未繳費"}, {"name": "詩涵", "total": 495, "stores": [0, 0, 105, 240, 0, 150], "status": "未繳費"}],details=[{"store": "八方雲集(午餐)", "person": "小菱", "items": "招牌鍋貼*10 ($70)、招牌水餃*10 ($70)、紅燒牛肉麵+滷蛋 ($183)", "amount": 323}, {"store": "八方雲集(午餐)", "person": "志明", "items": "招牌水餃*10 ($70)、韓式辣味水餃*10 ($70)、玉米水餃*10 ($70)、麻醬乾麵(大)+滷蛋 ($90)", "amount": 300}, {"store": "八方雲集(午餐)", "person": "小古", "items": "玉米鍋貼*10、韓式辣味鍋貼*10、招牌鍋貼*20、韓式水餃*10", "amount": 350}, {"store": "八方雲集(午餐)", "person": "侑靜", "items": "玉米鍋貼*10 ($70)、招牌鍋貼*10 ($70)、招牌鍋貼*10 ($70)、酸辣湯*2 ($70)", "amount": 280}, {"store": "八方雲集(午餐)", "person": "宏哥", "items": "紅燒牛湯餃 ($120)", "amount": 120}, {"store": "八方雲集(午餐)", "person": "米倫", "items": "玉米鍋貼*10 ($70)、招牌乾麵-小 ($55)、紅油珍珠抄手 ($60)、玉米濃湯*2 ($70)、招牌水餃*20 ($140)", "amount": 395}, {"store": "八方雲集(午餐)", "person": "球球1", "items": "辣味鍋貼8+10 ($126)、玉米鍋貼5+12 ($119)、玉米水餃4 ($28)、酸辣湯 ($35)、玉米濃湯 ($35)、滷蛋*2 ($30)、燙青菜*3 ($105)", "amount": 478}, {"store": "八方雲集(午餐)", "person": "球球2", "items": "玉米湯餃 ($90)、招牌鍋貼*15 ($105)、辣味水餃*15 ($105)、小古早味乾麵-小 ($45)", "amount": 345}, {"store": "上野便當(午餐)", "person": "依潔", "items": "烤肉飯 ($115)、烤排骨飯 ($115)、烤雞排飯 ($120)", "amount": 350}, {"store": "上野便當(午餐)", "person": "曉隸", "items": "烤肉飯 ($115)、烤排骨飯 ($115)、烤雞排飯 ($120)", "amount": 350}, {"store": "清心福全", "person": "小菱", "items": "紅心芭樂多多+椰果(半糖少冰) ($85)、多多綠加QQ(半糖正常冰) ($65)", "amount": 150}, {"store": "清心福全", "person": "志明", "items": "珍珠鮮奶茶(少糖少冰)L*2 ($140)", "amount": 140}, {"store": "清心福全", "person": "侑靜", "items": "情人茶(半糖微冰)*2 ($120)、甘蔗四季(少糖微冰) ($65)", "amount": 185}, {"store": "清心福全", "person": "小古", "items": "烏龍清茶(無糖微冰) ($35)、珍珠鮮奶茶(微糖微冰) ($70)", "amount": 105}, {"store": "清心福全", "person": "依潔", "items": "烏龍綠(無糖少冰)L ($35)、優多綠(無糖少冰)L ($55)、布丁奶茶(無糖少冰)L ($60)、仙草凍奶茶(無糖少冰)L ($60)", "amount": 210}, {"store": "清心福全", "person": "米倫", "items": "優多綠+椰果L(微糖少冰) ($65)、冰淇淋紅茶+布丁L(微糖少冰) ($75)、優多綠茶L(微糖少冰) ($55)、鮮奶茶M(微糖少冰) ($55)、雙Q百香果綠茶L(少冰微糖) ($70)", "amount": 320}, {"store": "清心福全", "person": "詩涵", "items": "普洱(無糖去冰)L*2 ($70)、紅茶(少糖去冰)L ($35)", "amount": 105}, {"store": "清心福全", "person": "球球1", "items": "荔枝蘋果醋(微糖微冰)*2 ($150)、烏龍奶(微糖微冰)*2 ($120)、情人茶(半糖微冰)*1 ($60)", "amount": 330}, {"store": "清心福全", "person": "曉隸", "items": "優多綠+椰果(半糖少冰)*3 ($195)", "amount": 195}, {"store": "炒飯(晚餐)", "person": "小菱", "items": "火腿炒飯 ($80)、燙青菜 ($40)、豬肉炒麵 ($80)", "amount": 200}, {"store": "炒飯(晚餐)", "person": "曉隸", "items": "燙青菜 ($40)、牛肉炒飯*2 ($160)、培根炒飯*1 ($80)", "amount": 280}, {"store": "炒飯(晚餐)", "person": "志明", "items": "牛肉炒飯 ($80)、羊肉炒飯 ($80)、牛肉炒麵 ($80)、羊肉炒麵 ($80)", "amount": 320}, {"store": "炒飯(晚餐)", "person": "依潔", "items": "蝦仁炒飯 ($80)、櫻花蝦炒飯 ($80)、牛肉炒麵 ($80)、燙青菜 ($40)", "amount": 280}, {"store": "炒飯(晚餐)", "person": "宏哥", "items": "羊肉炒麵 ($80)、骨仔肉湯 ($50)", "amount": 130}, {"store": "炒飯(晚餐)", "person": "米倫", "items": "蝦仁炒飯 ($80)、蛤蜊湯*2 ($100)、燙青菜 ($40)、豬肉炒麵 ($80)", "amount": 300}, {"store": "炒飯(晚餐)", "person": "詩涵", "items": "牛肉炒飯*2 ($160)、櫻花蝦炒飯*1 ($80)", "amount": 240}, {"store": "炒飯(晚餐)", "person": "球球1", "items": "櫻花蝦炒飯*3 ($240)、乾米粉*2 ($100)、蘿蔔湯*2 ($80)、燙青菜 ($40)", "amount": 460}, {"store": "炒飯(晚餐)", "person": "球球2", "items": "牛肉燴飯 ($80)、鴨肉麵 ($50)、骨仔肉湯 ($50)、牛肉炒飯 ($80)", "amount": 260}, {"store": "上野便當(晚餐)", "person": "小菱", "items": "烤肉飯*1 ($115)", "amount": 115}, {"store": "上野便當(晚餐)", "person": "小古", "items": "香酥雞腿便當*2、豪大雞排便當", "amount": 360}, {"store": "上野便當(晚餐)", "person": "侑靜", "items": "烤雞腿飯*2 ($240)、白飯*1 ($15)", "amount": 255}, {"store": "鹹酥雞(宵夜)", "person": "小菱", "items": "鹹酥雞 ($60)、糯米腸 ($25)、鑫鑫腸 ($25)、雞屁股(大辣) ($30)、花椰菜 ($40)", "amount": 180}, {"store": "鹹酥雞(宵夜)", "person": "曉隸", "items": "鹹酥雞排*3 ($240)、魷魚頭*1 ($60)", "amount": 285}, {"store": "鹹酥雞(宵夜)", "person": "志明", "items": "醬燒雞排 ($80)、梅子雞排 ($80)、酥脆甜不辣*2 ($60)、雞屁股 ($30)、鑫鑫腸*2 ($50)、花枝丸*2 ($60)", "amount": 360}, {"store": "鹹酥雞(宵夜)", "person": "依潔", "items": "醬燒雞排 ($80)、魷魚頭*1 ($60)、酥脆甜不辣*1 ($30)、地瓜薯條*1 ($30)", "amount": 200}, {"store": "鹹酥雞(宵夜)", "person": "宏哥", "items": "三角骨 ($60)、香酥雞皮 ($40)、花枝丸 ($30)、雞屁股*2 ($60)、米腸 ($25)", "amount": 215}, {"store": "鹹酥雞(宵夜)", "person": "米倫", "items": "地瓜薯條 ($30)、甜不辣*2 ($60)、甜芋頭 ($30)、鹹酥雞 ($60)、四季豆 ($40)", "amount": 220}, {"store": "鹹酥雞(宵夜)", "person": "詩涵", "items": "鹽酥雞排*2 ($150)", "amount": 150}, {"store": "鹹酥雞(宵夜)", "person": "球球1", "items": "魷魚頭 ($60)、鹹酥雞 ($60)、酥脆甜不辣 ($30)、米血糕 ($30)、雞塊 ($20)、四季豆 ($40)、仙草甘茶 ($30)", "amount": 270}, {"store": "鹹酥雞(宵夜)", "person": "球球2", "items": "鹹酥雞 ($60)、玉米筍 ($40)、馬鈴薯條(梅粉) ($30)、香酥雞皮*2 ($80)、雞心 ($30)", "amount": 240}],assignments=[{"store": "八方雲集", "time": "12:30", "owner": "米倫", "total": 2591}, {"store": "上野便當", "time": "12:30", "owner": "依潔", "total": 700}, {"store": "清心福全", "time": "13:30", "owner": "球球", "total": 1740}, {"store": "炒飯", "time": "18:00", "owner": "依潔", "total": 2470}, {"store": "上野便當", "time": "18:00", "owner": "依潔", "total": 730}, {"store": "鹹酥雞", "time": "21:00", "owner": "詩涵", "total": 2120}],storeTotals={"八方雲集(午餐)": 2591, "上野便當(午餐)": 700, "清心福全": 1740, "炒飯(晚餐)": 2470, "上野便當(晚餐)": 730, "鹹酥雞(宵夜)": 2120};const total=people.reduce((a,p)=>a+p.total,0),money=n=>'$'+Number(n).toLocaleString('zh-TW');
+const dataVersion='20260912-0820';const key='campOrderPay_20260912';let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}const nameMap={'菱':'小菱','明':'志明','古':'小古','靜':'侑靜','宏':'宏哥','球1':'球球1','球2':'球球2','隸':'曉隸','涵':'詩涵','潔':'依潔'};Object.keys(nameMap).forEach(o=>{if(state[o]&&!state[nameMap[o]])state[nameMap[o]]=state[o];delete state[o]});people.forEach(p=>{if(!state[p.name])state[p.name]=p.status});let draftState=Object.assign({},state);
 function openPayPwd(){const m=document.querySelector('#payPwdModal'),i=document.querySelector('#payPwdInput');m.classList.add('show');document.body.classList.add('modal-open');i.value='';setTimeout(()=>i.focus(),50)}
 function closePayPwd(){document.querySelector('#payPwdModal').classList.remove('show');document.body.classList.remove('modal-open')}
 function updateSavedHint(){const el=document.querySelector('#paySavedAt');if(!el)return;let t='';try{t=localStorage.getItem(key+'_updatedAt')||''}catch(e){}el.textContent=t?'最後儲存：'+new Date(t).toLocaleString('zh-TW'):''}
