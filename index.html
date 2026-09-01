@@ -187,9 +187,6 @@
 <div class="toast" id="toast">已更新繳費狀況</div>
 
 <script>
-// ◄◄ 請在引號內貼上您的 Google Apps Script 網頁應用程式 URL
-const GAS_URL = "https://script.google.com/macros/s/AKfycbwH5AEeXO3lHTgcSQ0Jkerm9dQ8jsrYS7j-xhsh_cC3bBzZNtdtz9-u4AogtzZjZfAY/exec";
-
 const people = [
   {"name": "小菱", "total": 1198, "stores": [323, 0, 150, 200, 345, 180], "status": "轉帳"},
   {"name": "志明", "total": 1120, "stores": [300, 0, 140, 320, 0, 360], "status": "LINE Pay"},
@@ -266,28 +263,46 @@ const storeTotals = {
 };
 
 const total = people.reduce((a,p)=>a+p.total,0), money = n => '$'+Number(n).toLocaleString('zh-TW');
+const STORAGE_KEY = 'campOrderPay';
+const UPDATE_KEY = 'campOrderPay_updatedAt';
+const BACKUP_KEY = 'campOrderPay_backup';
 const MINE_KEY = 'campOrderMine';
+const LEGACY_KEYS = ['campOrderPay_20260912'];
+const nameMap = {'菱':'小菱','明':'志明','古':'小古','靜':'侑靜','宏':'宏哥','球1':'球球1','球2':'球球2','隸':'曉隸','涵':'詩涵','潔':'依潔'};
 
-let state = {};
-people.forEach(p => state[p.name] = p.status); // 預設值
-let draftState = {...state};
-
-async function fetchRemoteState(){
-  if(!GAS_URL || GAS_URL.includes("YOUR_SCRIPT_ID")) return;
+function safeParse(raw){
+  if(!raw) return null;
   try{
-    const res = await fetch(GAS_URL);
-    const remoteData = await res.json();
-    if(remoteData && typeof remoteData === 'object'){
-      Object.keys(remoteData).forEach(name => {
-        if(remoteData[name]) state[name] = remoteData[name];
-      });
-      draftState = {...state};
-      stats(); pay(); mine();
-    }
-  }catch(e){
-    console.error('從雲端載入狀態失敗', e);
-  }
+    const value = JSON.parse(raw);
+    return value && typeof value === 'object' && !Array.isArray(value) ? value : null;
+  }catch(e){ return null; }
 }
+
+function loadState(){
+  let loaded = null;
+  try{
+    loaded = safeParse(localStorage.getItem(STORAGE_KEY));
+    if(!loaded) loaded = safeParse(localStorage.getItem(BACKUP_KEY));
+    if(!loaded){
+      for(const legacyKey of LEGACY_KEYS){
+        loaded = safeParse(localStorage.getItem(legacyKey));
+        if(loaded) break;
+      }
+    }
+  }catch(e){ console.error('讀取本機資料失敗：', e); }
+  const result = loaded || {};
+  Object.keys(nameMap).forEach(oldName => {
+    const newName = nameMap[oldName];
+    if(result[oldName] && !result[newName]) result[newName] = result[oldName];
+    delete result[oldName];
+  });
+  // 優先套用試算表定義的初始狀態
+  people.forEach(p => { if(!result[p.name]) result[p.name] = p.status; });
+  return result;
+}
+
+let state = loadState();
+let draftState = {...state};
 
 function openPayPwd(){
   const m=document.querySelector('#payPwdModal'), i=document.querySelector('#payPwdInput');
@@ -303,52 +318,49 @@ function closePayPwd(){
 function updateSavedHint(){
   const el=document.querySelector('#paySavedAt');
   if(!el) return;
-  el.textContent = '線上即時同步中';
+  try{
+    const t=localStorage.getItem(UPDATE_KEY)||'';
+    el.textContent = t ? '最後儲存：'+new Date(t).toLocaleString('zh-TW') : '';
+  }catch(e){ el.textContent=''; }
 }
-
-async function save(){
+function persistState(nextState){
+  try{
+    const json = JSON.stringify(nextState);
+    localStorage.setItem(STORAGE_KEY, json);
+    if(localStorage.getItem(STORAGE_KEY) !== json) throw new Error('資料寫入驗證不一致');
+    localStorage.setItem(BACKUP_KEY, json);
+    localStorage.setItem(UPDATE_KEY, new Date().toISOString());
+    updateSavedHint();
+    return true;
+  }catch(e){
+    console.error('存檔失敗：', e);
+    toast('存檔失敗，請改用 Safari 或 Chrome 非私密模式');
+    return false;
+  }
+}
+function save(){
   const input = document.querySelector('#payPwdInput');
   const pwd = input.value.trim();
-  if(!pwd){
-    toast('請輸入密碼');
+  if(pwd !== '0912'){
+    toast('密碼錯誤，未儲存');
+    input.value = '';
+    input.focus();
     return;
   }
-  
-  toast('連線儲存中...');
   const nextState = {...draftState};
-  
-  if(!GAS_URL || GAS_URL.includes("YOUR_SCRIPT_ID")){
-    toast('請先在 index.html 填入 GAS_URL');
-    return;
-  }
-
-  try{
-    const res = await fetch(GAS_URL, {
-      method: 'POST',
-      body: JSON.stringify({ pwd: pwd, state: nextState })
-    });
-    const result = await res.json();
-    if(result.status === 'success'){
-      state = nextState;
-      draftState = {...state};
-      document.querySelector('#pay')?.classList.remove('dirty');
-      closePayPwd();
-      stats(); pay(); mine();
-      toast('已成功存入雲端！');
-    }else{
-      toast(result.message || '密碼錯誤，未儲存');
-    }
-  }catch(e){
-    console.error('儲存失敗', e);
-    toast('網路發送失敗，請稍後再試');
-  }
+  if(!persistState(nextState)) return;
+  state = nextState;
+  draftState = {...state};
+  document.querySelector('#pay')?.classList.remove('dirty');
+  closePayPwd();
+  stats(); pay(); mine();
+  toast('已成功儲存');
 }
-
 function toast(msg){
   const t=document.querySelector('#toast');
   if(msg) t.textContent=msg;
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),1500);
+  setTimeout(()=>t.classList.remove('show'),1200);
 }
 function stats(){
   const paid = people.filter(p => state[p.name] !== '未繳費');
@@ -436,7 +448,7 @@ f.onchange = orders;
 const mp = document.querySelector('#myPerson');
 people.forEach(p => mp.insertAdjacentHTML('beforeend', `<option>${p.name}</option>`));
 let savedMine = '';
-try { savedMine = localStorage.getItem(MINE_KEY) || ''; } catch(e){}
+try { savedMine = localStorage.getItem(MINE_KEY) || localStorage.getItem('campOrderMine_20260912') || ''; } catch(e){}
 if(savedMine && people.some(p => p.name === savedMine)) mp.value = savedMine;
 else if(people.some(p => p.name === '依潔')) mp.value = '依潔';
 mp.onchange = mine;
@@ -454,9 +466,36 @@ document.querySelector('#payInfoBtn').onclick = openPayInfo;
 document.querySelector('#payInfoClose').onclick = closePayInfo;
 document.querySelector('#payInfoModal').onclick = e => { if(e.target.id === 'payInfoModal') closePayInfo(); };
 
+let deferred;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferred = e;
+  document.querySelector('#installBtn').style.display = 'block';
+});
+document.querySelector('#installBtn').onclick = async () => {
+  if(deferred){ deferred.prompt(); deferred = null; }
+};
+
+(()=>{
+  try {
+    if(window.isSecureContext && location.protocol !== 'about:' && ('serviceWorker' in navigator)) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+    }
+  } catch(e){}
+})();
+
+window.addEventListener('storage', e => {
+  if(e.key !== STORAGE_KEY) return;
+  const incoming = safeParse(e.newValue);
+  if(!incoming) return;
+  state = incoming;
+  draftState = {...state};
+  document.querySelector('#pay')?.classList.remove('dirty');
+  updateSavedHint(); stats(); pay(); mine();
+});
+
 updateSavedHint();
 stats(); home(); pay(); orders(); mine();
-fetchRemoteState(); // 載入雲端最新資料
 </script>
 </body>
 </html>
