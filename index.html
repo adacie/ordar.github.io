@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>小叮噹團露訂餐</title>
 <style>
-:root{--bg:#f3f5f7;--card:#fff;--navy:#183b56;--teal:#12a493;--green:#25885d;--orange:#f39a43;--ink:#172b3a;--muted:#72808b;--line:#e7ecef;--safe:env(safe-area-inset-bottom,0px)}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;overscroll-behavior:none}.app{max-width:680px;margin:auto;min-height:100vh;padding-bottom:calc(88px + var(--safe))}.top{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#183b56,#176a72);color:#fff;padding:calc(18px + env(safe-area-inset-top,0px)) 20px 22px;border-radius:0 0 28px 28px;box-shadow:0 8px 22px #183b5630}.topline{display:flex;justify-content:space-between;align-items:center}.brand{font-size:13px;opacity:.78;font-weight:700}.title{font-size:25px;font-weight:900;margin:4px 0}.date{font-size:13px;opacity:.82}.install{border:1px solid #ffffff60;background:#ffffff18;color:#fff;border-radius:12px;padding:8px 11px;font-weight:800;display:none}.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.hero-stat{background:#ffffff17;border:1px solid #ffffff24;border-radius:17px;padding:13px}.hero-stat small{display:block;opacity:.76}.hero-stat b{display:block;font-size:19px;margin-top:3px}.screen{display:none;padding:16px}.screen.active{display:block}.section-title{display:flex;justify-content:space-between;align-items:end;margin:7px 2px 12px}.section-title h2{font-size:18px;margin:0}.section-title span{font-size:12px;color:var(--muted)}.cards{display:grid;gap:11px}.card{background:var(--card);border-radius:19px;padding:16px;box-shadow:0 5px 18px #183b5610;border:1px solid #fff}.store-card{display:grid;grid-template-columns:1fr auto;gap:8px}.store-card b{font-size:16px}.amount{font-size:14px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}.bar-track{height:8px;background:#e9eff1;border-radius:99px;overflow:hidden;grid-column:1/-1}.bar{height:100%;background:linear-gradient(90deg,var(--teal),#377fc0);border-radius:99px}.task{display:grid;grid-template-columns:58px 132px 96px 1fr 118px;gap:10px;align-items:center;cursor:pointer}.task:active{transform:scale(.995)}.task-time{background:#eaf6f4;color:#14796e;border-radius:12px;padding:9px 6px;text-align:center;font-weight:900}.overview-main{min-width:0}.store-title{font-size:16px;line-height:1.35;white-space:nowrap}.task .amount{grid-column:3/4;justify-self:start;text-align:left;min-width:96px}.owner-pill{grid-column:5/6;justify-self:end;text-align:right;color:#0b4f6c;background:#dff3ff;border:1px solid #b9e5fa;border-radius:99px;padding:5px 10px;font-weight:900;font-size:13px;white-space:nowrap}.owner-pill:before{content:""}@media(max-width:420px){.task{grid-template-columns:58px 112px 86px 1fr}.store-title{white-space:normal}.task .amount{grid-column:3/4;grid-row:1/2;justify-self:start;text-align:left;min-width:86px}.owner-pill{grid-column:4/5;grid-row:1/2;justify-self:end;text-align:right}}.modal{position:fixed;inset:0;z-index:80;background:#102a3acc;display:none;place-items:end center;padding:16px 12px calc(92px + var(--safe));backdrop-filter:blur(8px)}.modal.show{display:grid}.modal-card{width:min(680px,100%);max-height:72vh;overflow:hidden;background:#fff;border-radius:24px;box-shadow:0 18px 50px #001b2a55;display:flex;flex-direction:column}.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:18px 18px 12px;border-bottom:1px solid var(--line)}.modal-head h3{margin:0;font-size:19px}.modal-head .sub{margin-top:4px}.modal-close{border:0;background:#eef3f5;border-radius:12px;width:42px;height:42px;font-size:24px;color:var(--ink)}.modal-body{overflow:auto;padding:4px 0}.modal-total{padding:12px 18px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-weight:900;color:var(--navy)}body.modal-open{overflow:hidden}.sub{font-size:12px;color:var(--muted);margin-top:3px}.pay-sticky{position:sticky;top:calc(142px + env(safe-area-inset-top,0px));z-index:18;background:var(--bg);padding:7px 0 12px;margin:-7px 0 12px;border-radius:0 0 18px 18px;box-shadow:0 8px 18px #183b560d}.pay-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}.mini{background:#fff;border-radius:16px;padding:13px 11px;box-shadow:0 4px 15px #183b560d}.mini small{display:block;color:var(--muted);font-size:11px}.mini b{display:block;font-size:18px;margin-top:5px}.person-card{display:grid;grid-template-columns:22px 1fr auto;gap:11px;align-items:center}.avatar{width:42px;height:42px;border-radius:14px;background:#eaf4f6;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:18px}.person-meta b{font-size:16px}.pay-select{min-width:108px;border:0;background:#eef3f5;border-radius:11px;padding:10px 8px;color:var(--ink);font-weight:800}.pay-light{width:16px;height:16px;border-radius:50%;background:#d84a4a;box-shadow:0 0 0 4px #ffe7e7,0 0 10px #d84a4a80}.paid .pay-light{background:var(--green);box-shadow:0 0 0 4px #e7f6ee,0 0 10px #25885d80}.paid .avatar{background:#e7f6ee;color:var(--green)}.paid .pay-select{background:#e7f6ee;color:var(--green)}.save-pay{border:0;background:linear-gradient(135deg,var(--teal),#176a72);color:#fff;border-radius:16px;padding:13px 10px;font-weight:900;font-size:16px;box-shadow:0 6px 16px #183b5620}.save-pay:active{transform:scale(.99)}#payHint{font-size:12px;color:var(--muted);text-align:center}.dirty #payHint{color:#c06a16;font-weight:800}.pwd-box{padding:18px;display:grid;gap:12px}.pwd-input{width:100%;border:1px solid #dbe3e7;background:#fff;border-radius:14px;padding:13px;font:inherit;font-size:18px;text-align:center;letter-spacing:4px}.pwd-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pwd-actions button{border:0;border-radius:14px;padding:12px;font-weight:900}.pwd-cancel{background:#eef3f5;color:var(--ink)}.pwd-confirm{background:linear-gradient(135deg,var(--teal),#176a72);color:#fff}.tools{display:grid;grid-template-columns:1fr 128px;gap:8px;margin-bottom:12px}.tools input,.tools select,.my-select{width:100%;min-width:0;border:1px solid #dbe3e7;background:#fff;border-radius:13px;padding:12px;font:inherit}.person-order{padding:0;overflow:hidden}.person-head{width:100%;border:0;background:#fff;padding:16px;display:flex;justify-content:space-between;align-items:center;text-align:left;font:inherit}.person-head b{font-size:17px}.person-head small{color:var(--muted)}.order-body{display:none;border-top:1px solid var(--line)}.person-order.open .order-body{display:block}.order-row{padding:14px 16px;border-bottom:1px solid var(--line)}.order-row:last-child{border-bottom:0}.order-top{display:flex;justify-content:space-between;gap:10px}.tag{font-size:11px;font-weight:800;color:#137a70;background:#e9f7f5;padding:4px 8px;border-radius:99px}.items{font-size:13px;color:#5d6a73;line-height:1.55;margin-top:8px}.my-hero{text-align:center;padding:22px}.my-avatar{width:72px;height:72px;border-radius:24px;margin:auto;background:linear-gradient(145deg,#def3ef,#dfeefa);display:grid;place-items:center;color:var(--navy);font-size:30px;font-weight:900}.my-total{font-size:34px;font-weight:900;color:var(--navy);margin:9px 0}.bottom{position:fixed;z-index:30;bottom:0;left:50%;transform:translateX(-50%);width:min(680px,100%);height:calc(72px + var(--safe));padding:8px 8px var(--safe);background:#fffffff2;backdrop-filter:blur(18px);border-top:1px solid #e4eaed;display:grid;grid-template-columns:repeat(4,1fr)}.tab{border:0;background:none;color:#7a8790;font-size:11px;font-weight:700}.tab .ico{display:block;font-size:21px;margin-bottom:3px}.tab.active{color:var(--navy)}.toast{position:fixed;left:50%;bottom:94px;transform:translate(-50%,20px);background:#183b56;color:#fff;padding:10px 14px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}.empty{text-align:center;color:var(--muted);padding:30px}@media(max-width:420px){.pay-sticky{top:calc(142px + env(safe-area-inset-top,0px))}.pay-summary{grid-template-columns:1fr 1fr}.save-pay{min-height:54px}}@media(min-width:700px){body{background:#e8edf0}.app{background:var(--bg);box-shadow:0 0 50px #183b5620}.top{border-radius:0 0 28px 28px}}@media(display-mode:standalone){.install{display:none!important}}
+:root{--bg:#f3f5f7;--card:#fff;--navy:#183b56;--teal:#12a493;--green:#25885d;--orange:#f39a43;--ink:#172b3a;--muted:#72808b;--line:#e7ecef;--safe:env(safe-area-inset-bottom,0px)}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",sans-serif;overscroll-behavior:none}.app{max-width:680px;margin:auto;min-height:100vh;padding-bottom:calc(88px + var(--safe))}.top{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#183b56,#176a72);color:#fff;padding:calc(18px + env(safe-area-inset-top,0px)) 20px 22px;border-radius:0 0 28px 28px;box-shadow:0 8px 22px #183b5630}.topline{display:flex;justify-content:space-between;align-items:center}.brand{font-size:13px;opacity:.78;font-weight:700}.title{font-size:25px;font-weight:900;margin:4px 0}.date{font-size:13px;opacity:.82}.install{border:1px solid #ffffff60;background:#ffffff18;color:#fff;border-radius:12px;padding:8px 11px;font-weight:800;display:none}.summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.hero-stat{background:#ffffff17;border:1px solid #ffffff24;border-radius:17px;padding:13px}.hero-stat small{display:block;opacity:.76}.hero-stat b{display:block;font-size:19px;margin-top:3px}.screen{display:none;padding:16px}.screen.active{display:block}.section-title{display:flex;justify-content:space-between;align-items:end;margin:7px 2px 12px}.section-title h2{font-size:18px;margin:0}.section-title span{font-size:12px;color:var(--muted)}.cards{display:grid;gap:11px}.card{background:var(--card);border-radius:19px;padding:16px;box-shadow:0 5px 18px #183b5610;border:1px solid #fff}.store-card{display:grid;grid-template-columns:1fr auto;gap:8px}.store-card b{font-size:16px}.amount{font-size:14px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}.bar-track{height:8px;background:#e9eff1;border-radius:99px;overflow:hidden;grid-column:1/-1}.bar{height:100%;background:linear-gradient(90deg,var(--teal),#377fc0);border-radius:99px}.task{display:grid;grid-template-columns:58px 132px 96px 1fr 118px;gap:10px;align-items:center;cursor:pointer}.task:active{transform:scale(.995)}.task-time{background:#eaf6f4;color:#14796e;border-radius:12px;padding:9px 6px;text-align:center;font-weight:900}.overview-main{min-width:0}.store-title{font-size:16px;line-height:1.35;white-space:nowrap}.task .amount{grid-column:3/4;justify-self:start;text-align:left;min-width:96px}.owner-pill{grid-column:5/6;justify-self:end;text-align:right;color:#0b4f6c;background:#dff3ff;border:1px solid #b9e5fa;border-radius:99px;padding:5px 10px;font-weight:900;font-size:13px;white-space:nowrap}.owner-pill:before{content:""}@media(max-width:420px){.task{grid-template-columns:58px 112px 86px 1fr}.store-title{white-space:normal}.task .amount{grid-column:3/4;grid-row:1/2;justify-self:start;text-align:left;min-width:86px}.owner-pill{grid-column:4/5;grid-row:1/2;justify-self:end;text-align:right}}.modal{position:fixed;inset:0;z-index:80;background:#102a3acc;display:none;place-items:end center;padding:16px 12px calc(92px + var(--safe));backdrop-filter:blur(8px)}.modal.show{display:grid}.modal-card{width:min(680px,100%);max-height:72vh;overflow:hidden;background:#fff;border-radius:24px;box-shadow:0 18px 50px #001b2a55;display:flex;flex-direction:column}.modal-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:18px 18px 12px;border-bottom:1px solid var(--line)}.modal-head h3{margin:0;font-size:19px}.modal-head .sub{margin-top:4px}.modal-close{border:0;background:#eef3f5;border-radius:12px;width:42px;height:42px;font-size:24px;color:var(--ink)}.modal-body{overflow:auto;padding:4px 0}.modal-total{padding:12px 18px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-weight:900;color:var(--navy)}body.modal-open{overflow:hidden}.sub{font-size:12px;color:var(--muted);margin-top:3px}.pay-sticky{position:sticky;top:calc(142px + env(safe-area-inset-top,0px));z-index:18;background:var(--bg);padding:7px 0 12px;margin:-7px 0 12px;border-radius:0 0 18px 18px;box-shadow:0 8px 18px #183b560d}.pay-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}.mini{background:#fff;border-radius:16px;padding:13px 11px;box-shadow:0 4px 15px #183b560d}.mini small{display:block;color:var(--muted);font-size:11px}.mini b{display:block;font-size:18px;margin-top:5px}.person-card{display:grid;grid-template-columns:22px 1fr auto;gap:11px;align-items:center}.avatar{width:42px;height:42px;border-radius:14px;background:#eaf4f6;color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:18px}.person-meta b{font-size:16px}.pay-select{min-width:108px;border:0;background:#eef3f5;border-radius:11px;padding:10px 8px;color:var(--ink);font-weight:800}.pay-light{width:16px;height:16px;border-radius:50%;background:#d84a4a;box-shadow:0 0 0 4px #ffe7e7,0 0 10px #d84a4a80}.paid .pay-light{background:var(--green);box-shadow:0 0 0 4px #e7f6ee,0 0 10px #25885d80}.paid .avatar{background:#e7f6ee;color:var(--green)}.paid .pay-select{background:#e7f6ee;color:var(--green)}.save-pay{border:0;background:linear-gradient(135deg,var(--teal),#176a72);color:#fff;border-radius:16px;padding:13px 10px;font-weight:900;font-size:15px;box-shadow:0 6px 16px #183b5620}.save-pay:active{transform:scale(.99)}#payHint{font-size:12px;color:var(--muted);text-align:center}.dirty #payHint{color:#c06a16;font-weight:800}.pwd-box{padding:18px;display:grid;gap:12px}.pwd-input{width:100%;border:1px solid #dbe3e7;background:#fff;border-radius:14px;padding:13px;font:inherit;font-size:18px;text-align:center;letter-spacing:4px}.pwd-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pwd-actions button{border:0;border-radius:14px;padding:12px;font-weight:900}.pwd-cancel{background:#eef3f5;color:var(--ink)}.pwd-confirm{background:linear-gradient(135deg,var(--teal),#176a72);color:#fff}.tools{display:grid;grid-template-columns:1fr 128px;gap:8px;margin-bottom:12px}.tools input,.tools select,.my-select{width:100%;min-width:0;border:1px solid #dbe3e7;background:#fff;border-radius:13px;padding:12px;font:inherit}.person-order{padding:0;overflow:hidden}.person-head{width:100%;border:0;background:#fff;padding:16px;display:flex;justify-content:space-between;align-items:center;text-align:left;font:inherit}.person-head b{font-size:17px}.person-head small{color:var(--muted)}.order-body{display:none;border-top:1px solid var(--line)}.person-order.open .order-body{display:block}.order-row{padding:14px 16px;border-bottom:1px solid var(--line)}.order-row:last-child{border-bottom:0}.order-top{display:flex;justify-content:space-between;gap:10px}.tag{font-size:11px;font-weight:800;color:#137a70;background:#e9f7f5;padding:4px 8px;border-radius:99px}.items{font-size:13px;color:#5d6a73;line-height:1.55;margin-top:8px}.my-hero{text-align:center;padding:22px}.my-avatar{width:72px;height:72px;border-radius:24px;margin:auto;background:linear-gradient(145deg,#def3ef,#dfeefa);display:grid;place-items:center;color:var(--navy);font-size:30px;font-weight:900}.my-total{font-size:34px;font-weight:900;color:var(--navy);margin:9px 0}.bottom{position:fixed;z-index:30;bottom:0;left:50%;transform:translateX(-50%);width:min(680px,100%);height:calc(72px + var(--safe));padding:8px 8px var(--safe);background:#fffffff2;backdrop-filter:blur(18px);border-top:1px solid #e4eaed;display:grid;grid-template-columns:repeat(4,1fr)}.tab{border:0;background:none;color:#7a8790;font-size:11px;font-weight:700}.tab .ico{display:block;font-size:21px;margin-bottom:3px}.tab.active{color:var(--navy)}.toast{position:fixed;left:50%;bottom:94px;transform:translate(-50%,20px);background:#183b56;color:#fff;padding:10px 14px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}.empty{text-align:center;color:var(--muted);padding:30px}@media(max-width:420px){.pay-sticky{top:calc(142px + env(safe-area-inset-top,0px))}.pay-summary{grid-template-columns:1fr 1fr 1fr}.save-pay,.pay-info-btn,.reset-pay-btn{min-height:50px;font-size:13px;padding:8px 4px}}@media(min-width:700px){body{background:#e8edf0}.app{background:var(--bg);box-shadow:0 0 50px #183b5620}.top{border-radius:0 0 28px 28px}}@media(display-mode:standalone){.install{display:none!important}}
 
 #pay.screen.active{position:fixed;left:50%;transform:translateX(-50%);top:calc(168px + env(safe-area-inset-top,0px));bottom:calc(72px + var(--safe));width:min(680px,100%);background:var(--bg);padding:16px;overflow:hidden;display:flex;flex-direction:column;z-index:12}.pay-sticky{position:relative!important;top:auto!important;flex:0 0 auto;margin:0 0 12px!important}.pay-sticky .section-title{margin-top:0}#payPeople{flex:1 1 auto;min-height:0;overflow:auto;padding-bottom:18px;overscroll-behavior:contain}@media(max-width:420px){#pay.screen.active{top:calc(168px + env(safe-area-inset-top,0px))}}
 
@@ -20,7 +20,8 @@
 
 .screen{width:100%;max-width:680px;margin:0 auto;box-sizing:border-box}
 #home.screen.active,#pay.screen.active,#orders.screen.active,#mine.screen.active{position:static;left:auto;top:auto;bottom:auto;width:100%;max-width:680px;height:auto;min-height:0;margin:0 auto;transform:none;overflow:visible;display:block}
-.pay-info-btn{border:0;background:#0b4f6c;color:#fff;border-radius:16px;padding:13px 10px;font-weight:900;font-size:16px;box-shadow:0 6px 16px #183b5620}
+.pay-info-btn{border:0;background:#0b4f6c;color:#fff;border-radius:16px;padding:13px 10px;font-weight:900;font-size:15px;box-shadow:0 6px 16px #183b5620}
+.reset-pay-btn{border:0;background:#eef3f5;color:#5d6a73;border-radius:16px;padding:13px 8px;font-weight:800;font-size:13px}
 .payment-options{padding:18px;display:grid;gap:12px}.payment-option{background:#f5f8f9;border:1px solid var(--line);border-radius:16px;padding:15px 16px}.payment-option b,.payment-option span{display:block}.payment-option span{line-height:1.65}
 #orders.screen.active .tools{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
 #orderPeople,.person-order,#orderPeople .person-order{height:auto;min-height:0;overflow:visible}
@@ -61,8 +62,6 @@
 }
 #home .owner-pill:before{content:""}
 @media(max-width:420px){
-  .pay-summary{grid-template-columns:1fr 1fr}
-  .save-pay,.pay-info-btn{min-height:54px;font-size:15px}
   #home .task{
     grid-template-columns:58px minmax(0,1fr) minmax(78px,98px);
     gap:7px;
@@ -113,8 +112,9 @@
         <div class="pay-summary">
           <button class="save-pay" id="savePayBtn">更新</button>
           <button class="pay-info-btn" id="payInfoBtn" type="button">我要繳費</button>
+          <button class="reset-pay-btn" id="resetPayBtn" type="button">重置狀態</button>
         </div>
-        <div id="payHint">選擇狀態後，需輸入密碼才會儲存<span id="paySavedAt"></span></div>
+        <div id="payHint">選擇狀態後按「更新」並輸入密碼儲存<span id="paySavedAt"></span></div>
       </div>
       <div class="cards" id="payPeople"></div>
     </section>
@@ -263,12 +263,9 @@ const storeTotals = {
 };
 
 const total = people.reduce((a,p)=>a+p.total,0), money = n => '$'+Number(n).toLocaleString('zh-TW');
-const STORAGE_KEY = 'campOrderPay';
-const UPDATE_KEY = 'campOrderPay_updatedAt';
-const BACKUP_KEY = 'campOrderPay_backup';
+const STORAGE_KEY = 'campOrderPay_v20260901'; // 獨立版本號金鑰，排除舊快取干擾
+const UPDATE_KEY = 'campOrderPay_updatedAt_v20260901';
 const MINE_KEY = 'campOrderMine';
-const LEGACY_KEYS = ['campOrderPay_20260912'];
-const nameMap = {'菱':'小菱','明':'志明','古':'小古','靜':'侑靜','宏':'宏哥','球1':'球球1','球2':'球球2','隸':'曉隸','涵':'詩涵','潔':'依潔'};
 
 function safeParse(raw){
   if(!raw) return null;
@@ -278,25 +275,18 @@ function safeParse(raw){
   }catch(e){ return null; }
 }
 
+function getDefaultState(){
+  const init = {};
+  people.forEach(p => { init[p.name] = p.status; });
+  return init;
+}
+
 function loadState(){
   let loaded = null;
   try{
     loaded = safeParse(localStorage.getItem(STORAGE_KEY));
-    if(!loaded) loaded = safeParse(localStorage.getItem(BACKUP_KEY));
-    if(!loaded){
-      for(const legacyKey of LEGACY_KEYS){
-        loaded = safeParse(localStorage.getItem(legacyKey));
-        if(loaded) break;
-      }
-    }
   }catch(e){ console.error('讀取本機資料失敗：', e); }
-  const result = loaded || {};
-  Object.keys(nameMap).forEach(oldName => {
-    const newName = nameMap[oldName];
-    if(result[oldName] && !result[newName]) result[newName] = result[oldName];
-    delete result[oldName];
-  });
-  // 優先套用試算表定義的初始狀態
+  const result = loaded || getDefaultState();
   people.forEach(p => { if(!result[p.name]) result[p.name] = p.status; });
   return result;
 }
@@ -327,16 +317,12 @@ function persistState(nextState){
   try{
     const json = JSON.stringify(nextState);
     localStorage.setItem(STORAGE_KEY, json);
-    if(localStorage.getItem(STORAGE_KEY) !== json) throw new Error('資料寫入驗證不一致');
-    localStorage.setItem(BACKUP_KEY, json);
     localStorage.setItem(UPDATE_KEY, new Date().toISOString());
     updateSavedHint();
-    return true;
   }catch(e){
-    console.error('存檔失敗：', e);
-    toast('存檔失敗，請改用 Safari 或 Chrome 非私密模式');
-    return false;
+    console.warn('LocalStorage 無法存取，改於記憶體內運作', e);
   }
+  return true;
 }
 function save(){
   const input = document.querySelector('#payPwdInput');
@@ -347,15 +333,24 @@ function save(){
     input.focus();
     return;
   }
-  const nextState = {...draftState};
-  if(!persistState(nextState)) return;
-  state = nextState;
-  draftState = {...state};
+  state = {...draftState};
+  persistState(state);
   document.querySelector('#pay')?.classList.remove('dirty');
   closePayPwd();
   stats(); pay(); mine();
-  toast('已成功儲存');
+  toast('已成功更新並儲存');
 }
+
+function resetToDefault(){
+  if(confirm('確定要將所有人狀態重置為試算表最新預設值嗎？')){
+    state = getDefaultState();
+    draftState = {...state};
+    persistState(state);
+    stats(); pay(); mine();
+    toast('已重置為最新預設狀態');
+  }
+}
+
 function toast(msg){
   const t=document.querySelector('#toast');
   if(msg) t.textContent=msg;
@@ -363,7 +358,7 @@ function toast(msg){
   setTimeout(()=>t.classList.remove('show'),1200);
 }
 function stats(){
-  const paid = people.filter(p => state[p.name] !== '未繳費');
+  const paid = people.filter(p => (state[p.name] || draftState[p.name]) !== '未繳費');
   document.querySelector('#topTotal').textContent = money(total);
   document.querySelector('#topPaid').textContent = paid.length+' / '+people.length+' 人';
 }
@@ -398,13 +393,20 @@ document.addEventListener('keydown', e => { if(e.key==='Escape' && document.quer
 
 function pay(){
   const opts = ['未繳費','轉帳','LINE Pay','現金'];
-  document.querySelector('#payPeople').innerHTML = people.map(p => `<div class="card person-card ${draftState[p.name]!=='未繳費'?'paid':''}"><span class="pay-light" title="${draftState[p.name]!=='未繳費'?'已繳':'未繳'}"></span><div class="person-meta"><b>${p.name}</b><div class="sub">應付 ${money(p.total)}</div></div><select class="pay-select" data-name="${p.name}">${opts.map(x => `<option ${draftState[p.name]===x?'selected':''}>${x}</option>`).join('')}</select></div>`).join('');
+  document.querySelector('#payPeople').innerHTML = people.map(p => {
+    const st = draftState[p.name] || p.status;
+    const isPaid = st !== '未繳費';
+    return `<div class="card person-card ${isPaid?'paid':''}"><span class="pay-light" title="${isPaid?'已繳':'未繳'}"></span><div class="person-meta"><b>${p.name}</b><div class="sub">應付 ${money(p.total)}</div></div><select class="pay-select" data-name="${p.name}">${opts.map(x => `<option ${st===x?'selected':''}>${x}</option>`).join('')}</select></div>`;
+  }).join('');
+  
   document.querySelectorAll('.pay-select').forEach(x => x.onchange = () => {
     draftState[x.dataset.name] = x.value;
     document.querySelector('#pay')?.classList.add('dirty');
     pay();
+    stats();
   });
 }
+
 function groupRows(arr){
   const g = {};
   arr.forEach(d => (g[d.person] ??= []).push(d));
@@ -448,7 +450,7 @@ f.onchange = orders;
 const mp = document.querySelector('#myPerson');
 people.forEach(p => mp.insertAdjacentHTML('beforeend', `<option>${p.name}</option>`));
 let savedMine = '';
-try { savedMine = localStorage.getItem(MINE_KEY) || localStorage.getItem('campOrderMine_20260912') || ''; } catch(e){}
+try { savedMine = localStorage.getItem(MINE_KEY) || ''; } catch(e){}
 if(savedMine && people.some(p => p.name === savedMine)) mp.value = savedMine;
 else if(people.some(p => p.name === '依潔')) mp.value = '依潔';
 mp.onchange = mine;
@@ -459,6 +461,8 @@ document.querySelector('#pwdCancel').onclick = closePayPwd;
 document.querySelector('#pwdConfirm').onclick = save;
 document.querySelector('#payPwdInput').onkeydown = e => { if(e.key === 'Enter') save(); };
 document.querySelector('#payPwdModal').onclick = e => { if(e.target.id === 'payPwdModal') closePayPwd(); };
+
+document.querySelector('#resetPayBtn').onclick = resetToDefault;
 
 function openPayInfo(){ document.querySelector('#payInfoModal').classList.add('show'); document.body.classList.add('modal-open'); }
 function closePayInfo(){ document.querySelector('#payInfoModal').classList.remove('show'); document.body.classList.remove('modal-open'); }
@@ -483,16 +487,6 @@ document.querySelector('#installBtn').onclick = async () => {
     }
   } catch(e){}
 })();
-
-window.addEventListener('storage', e => {
-  if(e.key !== STORAGE_KEY) return;
-  const incoming = safeParse(e.newValue);
-  if(!incoming) return;
-  state = incoming;
-  draftState = {...state};
-  document.querySelector('#pay')?.classList.remove('dirty');
-  updateSavedHint(); stats(); pay(); mine();
-});
 
 updateSavedHint();
 stats(); home(); pay(); orders(); mine();
